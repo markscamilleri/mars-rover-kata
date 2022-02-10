@@ -5,7 +5,7 @@ import {TurnRightCommand} from "../commands/turnRightCommand";
 import {TurnLeftCommand} from "../commands/turnLeftCommand";
 import {UndoCommand} from "../commands/undoCommand";
 
-class MarsRoverExecutor {
+export class MarsRoverExecutor {
     private readonly marsRover: MarsRover
 
     private readonly turnRightCommand: TurnRightCommand
@@ -20,7 +20,7 @@ class MarsRoverExecutor {
         this.undoCommand = new UndoCommand(this.marsRover)
     }
 
-    private executeCommand(command: Command){
+    private executeCommand = (command: Command) => {
         const commands = {
             "R": this.turnRightCommand,
             "L": this.turnLeftCommand,
@@ -30,7 +30,7 @@ class MarsRoverExecutor {
         commands[command].execute()
     }
 
-    public executeAllCommands(commandList: Command[]): Position{
+    public executeAllCommands = (commandList: Command[]): Position => {
         commandList.forEach(this.executeCommand)
         return this.marsRover.currentPosition;
     }
