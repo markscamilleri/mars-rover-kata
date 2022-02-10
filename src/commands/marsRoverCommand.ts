@@ -1,3 +1,1 @@
-export interface MarsRoverCommand {
-
-}
+export interface MarsRoverCommand {}
