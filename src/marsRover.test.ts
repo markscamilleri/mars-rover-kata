@@ -33,6 +33,20 @@ describe("Mars Rover", () => {
                   direction: left,
               });
           })
+
+          it('should add the current position to the position history', () => {
+              expect(rover.history).toEqual([
+                  {
+                      x: startingPosition.x,
+                      y: startingPosition.y,
+                      direction: startingPosition.direction,
+                  },
+                  {
+                  x: startingPosition.x,
+                  y: startingPosition.y,
+                  direction: left,
+              }])
+          })
       });
 
       describe("And it is given the command to turn right", () => {
@@ -49,7 +63,7 @@ describe("Mars Rover", () => {
           })
       })
 
-      describe("And it is given the command to move", () => {
+      describe.skip("And it is given the command to move", () => {
           beforeEach(() => {
               rover = new MarsRover(startingPosition);
               rover.move();
