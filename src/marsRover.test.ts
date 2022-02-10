@@ -1,6 +1,6 @@
 import MarsRover from "./marsRover";
-import { Position } from "./position";
-import { Direction } from "./direction";
+import { Position } from "./types/position";
+import { Direction } from "./types/direction";
 
 describe("Mars Rover", () => {
   describe.each([

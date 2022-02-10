@@ -1,18 +1,16 @@
-import { CLOCKWISE_ORDER } from "./direction";
-import { Position } from "./position";
-import { PositionHistory } from "./commands/positionHistory";
+import { CLOCKWISE_ORDER } from "./types/direction";
+import { Position } from "./types/position";
+import { PositionHistory } from "./positionHistory";
 
 export default class MarsRover {
-  private position: Position;
   private positionHistory = new PositionHistory();
 
   constructor(initialPosition: Position) {
-    this.position = initialPosition;
-    this.positionHistory.push(this.position);
+    this.positionHistory.push(initialPosition);
   }
 
   get currentPosition(): Position {
-    return this.position;
+    return this.positionHistory.peek();
   }
 
   get history(): Position[] {
@@ -20,31 +18,34 @@ export default class MarsRover {
   }
 
   turnLeft() {
-    this.position = {
-      ...this.position,
+    const lastPosition = this.positionHistory.peek()
+
+    const position = {
+      ...lastPosition,
       direction:
         CLOCKWISE_ORDER[
-          (((CLOCKWISE_ORDER.indexOf(this.position.direction) - 1) % 4) + 4) % 4
+          (((CLOCKWISE_ORDER.indexOf(lastPosition.direction) - 1) % 4) + 4) % 4
         ],
     };
-    this.positionHistory.push(this.position);
+    this.positionHistory.push(position);
   }
 
   turnRight() {
-    this.position = {
-      ...this.position,
+    const lastPosition = this.positionHistory.peek()
+
+    const position = {
+      ...lastPosition,
       direction:
         CLOCKWISE_ORDER[
-          (CLOCKWISE_ORDER.indexOf(this.position.direction) + 1) % 4
+          (CLOCKWISE_ORDER.indexOf(lastPosition.direction) + 1) % 4
         ],
     };
-    this.positionHistory.push(this.position);
+    this.positionHistory.push(position);
   }
 
   move() {}
 
   undo() {
     this.positionHistory.pop();
-    this.position = this.positionHistory.peek();
   }
 }

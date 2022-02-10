@@ -1,5 +1,5 @@
-import { Position } from "../position";
-import { Stack } from "../utils/stack";
+import { Position } from "./types/position";
+import { Stack } from "./types/stack";
 
 export class PositionHistory implements Stack<Position> {
   private positionHistory: Position[] = [];
