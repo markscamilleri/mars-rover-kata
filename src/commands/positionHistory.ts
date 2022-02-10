@@ -1,22 +1,28 @@
-import {Position} from "../position";
-import {Stack} from "../utils/stack";
+import { Position } from "../position";
+import { Stack } from "../utils/stack";
 
-export class PositionHistory implements Stack<Position>{
-    private positionHistory: Position[] = [];
+export class PositionHistory implements Stack<Position> {
+  private positionHistory: Position[] = [];
 
-    asArray(): Position[] {
-        return this.positionHistory.map((position: Position) => ({...position}))
+  asArray(): Position[] {
+    return this.positionHistory.map((position: Position) => ({ ...position }));
+  }
+
+  pop(): Position {
+    if (this.positionHistory.length === 0) {
+      return undefined;
     }
+    return this.positionHistory.pop();
+  }
 
-    pop(): Position {
-        if(this.positionHistory.length === 0){
-            return undefined
-        }
-        return this.positionHistory.pop();
+  push(item: Position): void {
+    this.positionHistory.push(item);
+  }
+
+  peek(): Position {
+    if (this.positionHistory.length === 0) {
+      return undefined;
     }
-
-    push(item: Position): void {
-        this.positionHistory.push(item)
-    }
-
+    return { ...this.positionHistory[this.positionHistory.length - 1] };
+  }
 }
