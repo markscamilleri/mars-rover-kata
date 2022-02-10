@@ -22,7 +22,7 @@ describe("Mars Rover", () => {
       });
 
       describe("And it is given the command to turn left", () => {
-          beforeEach(() => {
+          beforeAll(() => {
               rover.turnLeft();
           });
 
@@ -34,7 +34,7 @@ describe("Mars Rover", () => {
               });
           })
 
-          it('should add the current position to the position history', () => {
+          it('should add all position states to the history', () => {
               expect(rover.history).toEqual([
                   {
                       x: startingPosition.x,
